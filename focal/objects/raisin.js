@@ -8,6 +8,7 @@ const raisinAlarm = function (cookie) {
       break;
     }
   }
+  // Using the ternary to return the correct string
   return isFound === true ? "Raisin alert!" : "All good!";
 };
 
@@ -31,5 +32,13 @@ console.log(
     ["🍫", "🍫", "🍇", "🍫"],
     ["🍫", "🍇", "🍫", "🍫", "🍇"],
     ["🍫", "🍫", "🍫"],
+  ])
+);
+
+//TEST CASE 2
+console.log(
+  raisinAlarmArray([
+    ["🍫", "🍫", "🍇", "🍫"],
+    ["🍫", "🍇", "🍫"]
   ])
 );
