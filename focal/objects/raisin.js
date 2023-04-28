@@ -14,3 +14,22 @@ const raisinAlarm = function (cookie) {
 console.log(raisinAlarm(["🍫", "🍫", "🍇", "🍫"]));
 console.log(raisinAlarm(["🍫", "🍇", "🍫", "🍫", "🍇"]));
 console.log(raisinAlarm(["🍫", "🍫", "🍫"]));
+
+// Stretch Activity
+
+const raisinAlarmArray = function(cookies) {
+  // Put your solution here
+  let response = [];
+  for (const cookie of cookies) {
+    response.push(raisinAlarm(cookie));
+  }
+  return response;
+};
+
+console.log(
+  raisinAlarmArray([
+    ["🍫", "🍫", "🍇", "🍫"],
+    ["🍫", "🍇", "🍫", "🍫", "🍇"],
+    ["🍫", "🍫", "🍫"],
+  ])
+);
