@@ -28,7 +28,10 @@ const getUserWithEmail = function (email) {
   .then((res)=>{
     const user = res.rows[0];
     return user;
-  });
+  })
+  .catch((err) => {
+    console.log(err);
+  });;
  };
 
 /**
@@ -42,7 +45,10 @@ const getUserWithId = function (id) {
   .then((res)=>{
     const user = res.rows[0];
     return user;
-  });
+  })
+  .catch((err) => {
+    console.log(err);
+  });;
 };
 
 /**
@@ -51,15 +57,18 @@ const getUserWithId = function (id) {
  * @return {Promise<{}>} A promise to the user.
  */
 const addUser = function (user) {
-  const { email, name, age } = user;
+  const { email, name, password } = user;
   return pool
     .query(
-      `INSERT INTO users (email, name, age) VALUES ($1, $2, $3) RETURNING *;`,
-      [email, name, age]
+      `INSERT INTO users (email, name, password) VALUES ($1, $2, $3) RETURNING *;`,
+      [email, name, password]
     )
     .then((res) => {
       const insertedUser = res.rows[0];
       return insertedUser;
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };
 
@@ -72,7 +81,17 @@ const addUser = function (user) {
  * @return {Promise<[{}]>} A promise to the reservations.
  */
 const getAllReservations = function (guest_id, limit = 10) {
-  return getAllProperties(null, 2);
+  return pool
+    .query(
+      `SELECT properties.*, reservations.* FROM reservations 
+      INNER JOIN properties ON properties.id = reservations.property_id
+       WHERE guest_id = $1 LIMIT $2;`,
+      [guest_id, limit]
+    )
+    .then((res) => {
+      const reservations = res.rows;
+      return reservations;
+    });
 };
 
 /// Properties
